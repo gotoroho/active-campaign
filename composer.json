@@ -1,18 +1,23 @@
 {
-    "name": "gotoroho/active-campaign",
-    "authors": [
-        {
-            "name": "gotoroho",
-            "email": "gotoroho@yandex.ru"
-        }
-    ],
-    "require": {
-        "php": ">=7.4"
-    },
-    "license": "proprietary",
-    "autoload": {
-        "psr-4": {
-            "Gotoroho\\ActiveCampaign\\": "src"
-        }
+  "name": "gotoroho/active-campaign",
+  "authors": [
+    {
+      "name": "gotoroho",
+      "email": "gotoroho@yandex.ru"
     }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "vlucas/phpdotenv": "^5.3"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "Gotoroho\\ActiveCampaign\\": "src"
+    }
+  }
 }
