@@ -4,10 +4,11 @@ namespace Gotoroho\ActiveCampaign;
 
 class Config
 {
-    private static bool $inited = false;
-
     private static string $url;
     private static string $token;
+    private static bool $inited = false;
+
+    private static int $connectionId;
 
     private function __construct() {}
 
@@ -30,5 +31,15 @@ class Config
             self::$url,
             self::$token,
         ];
+    }
+
+    public static function setConnectionId(int $connectionId)
+    {
+        self::$connectionId = $connectionId;
+    }
+
+    public static function getConnectionId(): int
+    {
+        return self::$connectionId;
     }
 }
