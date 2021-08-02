@@ -16,19 +16,30 @@ class Customer
         $connectionModel = new Connection();
         $connection = $connectionModel->findOrCreate();
 
-        $response = $request->setCustomRequest("POST")->setPostFields(json_encode([
+        $post = json_encode([
             "ecomCustomer" => [
                 "connectionid" => $connection['id'],
                 "externalid" => $externalId,
                 "email" => $email,
                 "acceptsMarketing" => "0"
             ]
-        ]))->exec();
+        ]);
+
+        $response = $request->setCustomRequest("POST")->setPostFields($post)->exec();
 
         return $response->getDataArray();
     }
 
-    public function findByEmail($email): array
+    public function find(int $id): array
+    {
+        $request = new Request(self::URL . "/$id");
+
+        $response = $request->setCustomRequest("GET")->exec();
+
+        return $response->getDataArray();
+    }
+
+    public function findByEmail(string $email): array
     {
         $filterQuery = Query::fromArray([
             "filters[email]" => $email,
@@ -51,4 +62,11 @@ class Customer
 
         return $this->create($externalId, $email);
     }
+
+//    private function delete(string $id): void
+//    {
+//        $request = new Request(self::URL . "/$id");
+//
+//        $request->setCustomRequest("DELETE")->exec();
+//    }
 }
