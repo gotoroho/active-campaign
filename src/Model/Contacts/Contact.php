@@ -3,17 +3,16 @@
 namespace Gotoroho\ActiveCampaign\Model\Contacts;
 
 use Gotoroho\ActiveCampaign\Model\Contacts\Dto\ContactDto;
-use Gotoroho\ActiveCampaign\Model\Model;
 use Gotoroho\ActiveCampaign\Query;
 use Gotoroho\ActiveCampaign\Request;
 
-class Contact extends Model
+class Contact
 {
-    protected string $path = "contacts";
+    const URL = "contacts";
 
     public function create(ContactDto $contactDto): array
     {
-        $request = new Request($this->url, $this->token);
+        $request = new Request(self::URL);
 
         $response = $request->setCustomRequest("POST")->setPostFields(json_encode([
             "contact" => [
@@ -33,7 +32,7 @@ class Contact extends Model
             "email" => $email
         ]);
 
-        $request = new Request($this->url . $filterQuery, $this->token);
+        $request = new Request(self::URL . $filterQuery);
 
         $response = $request->setCustomRequest("GET")->exec();
 
@@ -45,7 +44,7 @@ class Contact extends Model
         $customers = $this->findByEmail($contactDto->getEmail());
 
         if ((int)$customers['meta']['total'] > 0) {
-            return $customers[$this->path][0];
+            return $customers[self::URL][0];
         }
 
         return $this->create($contactDto);

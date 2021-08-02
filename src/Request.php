@@ -8,12 +8,14 @@ class Request
 {
     private $curl;
 
-    public function __construct($url, $token)
+    public function __construct($urlPostfix)
     {
+        list($url, $token) = Config::getData();
+
         $this->curl = curl_init();
 
         curl_setopt_array($this->curl, [
-            CURLOPT_URL => $url,
+            CURLOPT_URL => $url . $urlPostfix,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

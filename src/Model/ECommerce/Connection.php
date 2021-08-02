@@ -2,13 +2,12 @@
 
 namespace Gotoroho\ActiveCampaign\Model\ECommerce;
 
-use Gotoroho\ActiveCampaign\Model\Model;
 use Gotoroho\ActiveCampaign\Query;
 use Gotoroho\ActiveCampaign\Request;
 
-class Connection extends Model
+class Connection
 {
-    protected string $path = "connections";
+    const URL = "connections";
 
     const DEFAULT_DATA = [
         "service" => "opencart",
@@ -20,7 +19,7 @@ class Connection extends Model
 
     public function create(): array
     {
-        $request = new Request($this->url, $this->token);
+        $request = new Request(self::URL);
 
         $response = $request->setCustomRequest("POST")->setPostFields(json_encode([
             "connection" => self::DEFAULT_DATA
@@ -35,7 +34,7 @@ class Connection extends Model
             "filters[service]" => self::DEFAULT_DATA['service'],
         ]);
 
-        $request = new Request($this->url . $filterQuery, $this->token);
+        $request = new Request(self::URL . $filterQuery);
 
         $response = $request->setCustomRequest("GET")->exec();
 
@@ -47,7 +46,7 @@ class Connection extends Model
         $customers = $this->findByService();
 
         if ((int)$customers['meta']['total'] > 0) {
-            return $customers[$this->path][0];
+            return $customers[self::URL][0];
         }
 
         return $this->create();
@@ -55,7 +54,7 @@ class Connection extends Model
 
     public function listAll(): array
     {
-        $request = new Request($this->url, $this->token);
+        $request = new Request(self::URL);
 
         $response = $request->setCustomRequest("GET")->exec();
 
