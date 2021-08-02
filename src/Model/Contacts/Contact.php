@@ -23,7 +23,7 @@ class Contact
             ]
         ]))->exec();
 
-        return $response->getDataArray();
+        return $response->getDataArray()['contact'];
     }
 
     public function findByEmail(string $email): array
@@ -49,4 +49,11 @@ class Contact
 
         return $this->create($contactDto);
     }
+
+//    public function delete(string $id): void
+//    {
+//        $request = new Request(self::URL . "/$id");
+//
+//        $request->setCustomRequest("DELETE")->exec();
+//    }
 }
