@@ -25,7 +25,7 @@ class Customer
 
         $response = $request->setCustomRequest("POST")->setPostFields($post)->exec();
 
-        return $response->getDataArray();
+        return $response->getDataArray()['ecomCustomer'];
     }
 
     public function find(int $id): array
