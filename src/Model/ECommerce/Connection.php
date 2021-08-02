@@ -25,7 +25,7 @@ class Connection
             "connection" => self::DEFAULT_DATA
         ]))->exec();
 
-        return $response->getDataArray();
+        return $response->getDataArray()['connection'];
     }
 
     public function findByService(): array
@@ -61,12 +61,10 @@ class Connection
         return $response->getDataArray();
     }
 
-//    public function delete(int $id): array
+//    public function delete(int $id)
 //    {
-//        $request = new Request($this->url . "/$id", $this->token);
+//        $request = new Request(self::URL . "/$id");
 //
-//        $response = $request->setCustomRequest("DELETE")->exec();
-//
-//        return $response->getDataArray();
+//        $request->setCustomRequest("DELETE")->exec();
 //    }
 }
