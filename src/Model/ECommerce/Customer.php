@@ -2,6 +2,7 @@
 
 namespace Gotoroho\ActiveCampaign\Model\ECommerce;
 
+use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\CustomerDto;
 use Gotoroho\ActiveCampaign\Query;
 use Gotoroho\ActiveCampaign\Request;
 
@@ -9,18 +10,15 @@ class Customer
 {
     const URL = "ecomCustomers";
 
-    public function create($externalId, $email): array
+    public function create(CustomerDto $customerDto): array
     {
         $request = new Request(self::URL);
 
-        $connectionModel = new Connection();
-        $connection = $connectionModel->findOrCreate();
-
         $post = json_encode([
             "ecomCustomer" => [
-                "connectionid" => $connection['id'],
-                "externalid" => $externalId,
-                "email" => $email,
+                "connectionid" => $customerDto->getConnectionId(),
+                "externalid" => $customerDto->getExternalId(),
+                "email" => $customerDto->getEmail(),
                 "acceptsMarketing" => "0"
             ]
         ]);
@@ -52,15 +50,15 @@ class Customer
         return $response->getDataArray();
     }
 
-    public function findOrCreate(int $externalId, string $email)
+    public function findOrCreate(CustomerDto $customerDto)
     {
-        $customers = $this->findByEmail($email);
+        $customers = $this->findByEmail($customerDto->getEmail());
 
         if ((int)$customers['meta']['total'] > 0) {
             return $customers[self::URL][0];
         }
 
-        return $this->create($externalId, $email);
+        return $this->create($customerDto);
     }
 
 //    private function delete(string $id): void
