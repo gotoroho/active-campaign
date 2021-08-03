@@ -49,7 +49,7 @@ class ActiveCampaign
         }
     }
 
-    public function saveCustomer(CustomerDto $customerDto)
+    public function saveCustomer(CustomerDto $customerDto): array
     {
         $customer = new Customer();
 

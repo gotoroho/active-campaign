@@ -51,7 +51,7 @@ class Customer
         return $response->getDataArray();
     }
 
-    public function findOrCreate(CustomerDto $customerDto)
+    public function findOrCreate(CustomerDto $customerDto): array
     {
         $customers = $this->findByEmail($customerDto->getEmail());
 

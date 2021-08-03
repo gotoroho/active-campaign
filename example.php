@@ -10,7 +10,7 @@ $dotenv->load();
 
 $activeCampaign = new ActiveCampaign($_ENV["URL"], $_ENV["TOKEN"]);
 
-$contactDto = new ContactDto('test@test.test', 'testname', 'testlastname', 'testphone');
+$contactDto = new ContactDto('test@test.test', 'testfirstname', 'testlastname', 'testphone');
 $contact = $activeCampaign->saveContact($contactDto);
 
 $activeCampaign->saveContactTags((int)$contact['id'], ['Opencart', 'Poland']);
