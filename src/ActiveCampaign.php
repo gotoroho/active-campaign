@@ -10,6 +10,8 @@ use Gotoroho\ActiveCampaign\Model\Dto\TagDto;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Connection;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Customer;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\CustomerDto;
+use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\OrderDto;
+use Gotoroho\ActiveCampaign\Model\ECommerce\Order;
 use Gotoroho\ActiveCampaign\Model\Tag;
 
 class ActiveCampaign
@@ -52,5 +54,12 @@ class ActiveCampaign
         $customer = new Customer();
 
         return $customer->findOrCreate($customerDto);
+    }
+
+    public function saveOrder(OrderDto $orderDto): array
+    {
+        $order = new Order();
+
+        return $order->create($orderDto);
     }
 }
