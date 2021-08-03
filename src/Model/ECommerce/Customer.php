@@ -2,6 +2,7 @@
 
 namespace Gotoroho\ActiveCampaign\Model\ECommerce;
 
+use Gotoroho\ActiveCampaign\Config;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\CustomerDto;
 use Gotoroho\ActiveCampaign\Query;
 use Gotoroho\ActiveCampaign\Request;
@@ -16,7 +17,7 @@ class Customer
 
         $post = json_encode([
             "ecomCustomer" => [
-                "connectionid" => $customerDto->getConnectionId(),
+                "connectionid" => Config::getConnectionId(),
                 "externalid" => $customerDto->getExternalId(),
                 "email" => $customerDto->getEmail(),
                 "acceptsMarketing" => "0"
