@@ -7,7 +7,6 @@ use Gotoroho\ActiveCampaign\Model\Contacts\ContactTag;
 use Gotoroho\ActiveCampaign\Model\Contacts\Dto\ContactDto;
 use Gotoroho\ActiveCampaign\Model\Contacts\Dto\ContactTagDto;
 use Gotoroho\ActiveCampaign\Model\Dto\TagDto;
-use Gotoroho\ActiveCampaign\Model\ECommerce\Connection;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Customer;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\CustomerDto;
 use Gotoroho\ActiveCampaign\Model\ECommerce\Dto\OrderDto;
@@ -19,9 +18,6 @@ class ActiveCampaign
     public function __construct(string $url, string $token)
     {
         Config::init($url, $token);
-
-        $connection = new Connection();
-        Config::setConnectionId((int)$connection->findOrCreate()['id']);
     }
 
     public function saveContact(ContactDto $contactDto): array

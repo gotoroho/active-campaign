@@ -2,6 +2,8 @@
 
 namespace Gotoroho\ActiveCampaign;
 
+use Gotoroho\ActiveCampaign\Model\ECommerce\Connection;
+
 class Config
 {
     private static string $url;
@@ -33,13 +35,9 @@ class Config
         ];
     }
 
-    public static function setConnectionId(int $connectionId)
-    {
-        self::$connectionId = $connectionId;
-    }
-
     public static function getConnectionId(): int
     {
-        return self::$connectionId;
+        $connection = new Connection();
+        return (int)$connection->findOrCreate()['id'];
     }
 }
