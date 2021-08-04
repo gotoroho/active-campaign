@@ -41,7 +41,7 @@ class Connection
         return $response->getDataArray();
     }
 
-    public function findOrCreate()
+    public function findOrCreate(): array
     {
         $customers = $this->findByService();
 
