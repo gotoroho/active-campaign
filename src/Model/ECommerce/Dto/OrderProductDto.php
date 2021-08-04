@@ -2,20 +2,6 @@
 
 namespace Gotoroho\ActiveCampaign\Model\ECommerce\Dto;
 
-/*
- * [
-        "externalid" => "PROD23456",
-        "name" => "Skateboard",
-        "price" => 3000,
-        "quantity" => 1,
-        "category" => "Toys",
-        "sku" => "SK8BOARD145",
-        "description" => "lorem ipsum...",
-        "imageUrl" => "https => /example.com/product.jpg",
-        "productUrl" => "https => /store.example.com/product45678"
-    ]
- */
-
 class OrderProductDto
 {
     private int $externalId;
